@@ -1,0 +1,210 @@
+{
+  "name": "Habits API",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "Create Habit",
+      "filename": "Create Habit.bru",
+      "seq": 1,
+      "request": {
+        "url": "http://localhost:8089/habit",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"userId\": \"dce00474-38ba-11f0-848a-04cf4b74ae64\",\n  \"name\": \"Brush Teeth\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Create a log for a habit",
+      "filename": "Create a log for a habit.bru",
+      "seq": 2,
+      "request": {
+        "url": "http://localhost:8089/habit-log",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"name\": \"Brush Teeth\",\n  \"userId\": \"dce00474-38ba-11f0-848a-04cf4b74ae64\",\n  \"date\": \"2024-05-17\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Retrieve habits associated to a user",
+      "filename": "Retrieve habits associated to a user.bru",
+      "seq": 3,
+      "request": {
+        "url": "http://localhost:8089/habit?userId=dce00474-38ba-11f0-848a-04cf4b74ae64",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "userId",
+            "value": "dce00474-38ba-11f0-848a-04cf4b74ae64",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Retrieve a habit's streak",
+      "filename": "Retrieve a habit's streak.bru",
+      "seq": 4,
+      "request": {
+        "url": "http://localhost:8089/habit/streak",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"name\": \"Brush Teeth\",\n  \"userId\": \"dce00474-38ba-11f0-848a-04cf4b74ae64\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Retrieve date logs for a habit",
+      "filename": "Retrieve date logs for a habit.bru",
+      "seq": 5,
+      "request": {
+        "url": "http://localhost:8089/habit-log?name=Brush Teeth&userId=dce00474-38ba-11f0-848a-04cf4b74ae64",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "name",
+            "value": "Brush Teeth",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "userId",
+            "value": "dce00474-38ba-11f0-848a-04cf4b74ae64",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Delete Habit by Name and User ID",
+      "filename": "Delete Habit by Name and User ID.bru",
+      "seq": 6,
+      "request": {
+        "url": "http://localhost:8089/habit?name=Brush Teeth&userId=dce00474-38ba-11f0-848a-04cf4b74ae64",
+        "method": "DELETE",
+        "headers": [],
+        "params": [
+          {
+            "name": "name",
+            "value": "Brush Teeth",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "userId",
+            "value": "dce00474-38ba-11f0-848a-04cf4b74ae64",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    }
+  ],
+  "environments": [],
+  "brunoConfig": {
+    "version": "1",
+    "name": "Habits API",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0,
+    "filesCount": 0
+  }
+}
