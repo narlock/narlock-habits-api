@@ -5,6 +5,7 @@ import com.narlock.habitapi.model.HabitId;
 import com.narlock.habitapi.model.HabitLog;
 import com.narlock.habitapi.model.HabitLogId;
 import com.narlock.habitapi.model.error.NotFoundException;
+import com.narlock.habitapi.model.response.HabitRemindResponse;
 import com.narlock.habitapi.repository.HabitLogRepository;
 import com.narlock.habitapi.repository.HabitRepository;
 import java.time.LocalDate;
@@ -87,5 +88,16 @@ public class HabitService {
     } catch (NotFoundException e) {
       return streak;
     }
+  }
+
+  public List<HabitRemindResponse> getHabitsByUserIdFilterRemindTimeOnlyNotCompletedToday(String userId) {
+    return habitRepository.getHabitsByUserId(userId).stream()
+        .filter(habit -> habit.getRemindTime() != null)
+        .filter(
+            remindHabit ->
+                !(getHabitCompletedDate(remindHabit.getName(), remindHabit.getUserId())
+                    .contains(LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE))))
+            .map(filteredHabit -> HabitRemindResponse.builder().remindTime(filteredHabit.getRemindTime()).name(filteredHabit.getName()).build())
+      .toList();
   }
 }

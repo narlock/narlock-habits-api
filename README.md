@@ -158,7 +158,7 @@ HTTP/1.1 200 OK
 ]
 ```
 
-### Retrieve an log for a habit by date
+### Retrieve a log for a habit by date
 
 ```json
 GET /habit-log?name=My Habit Name&userId=1&date=2024-05-17

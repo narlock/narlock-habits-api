@@ -1,6 +1,7 @@
 package com.narlock.habitapi.controller;
 
 import com.narlock.habitapi.model.Habit;
+import com.narlock.habitapi.model.response.HabitRemindResponse;
 import com.narlock.habitapi.service.HabitService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,18 @@ public class HabitController {
   @ResponseStatus(HttpStatus.OK)
   public List<Habit> getListsByUserId(@RequestParam String userId) {
     return habitService.getHabitsByUserId(userId);
+  }
+
+
+  /**
+   * Returns list of reminders that have NOT been completed on the system's current date.
+   * @param userId the user's id
+   * @return list of habits that have not been completed today (no log)
+   */
+  @GetMapping("/reminder/today")
+  @ResponseStatus(HttpStatus.OK)
+  public List<HabitRemindResponse> getHabitNamesWithRemindTimeByUserId(@RequestParam String userId) {
+    return habitService.getHabitsByUserIdFilterRemindTimeOnlyNotCompletedToday(userId);
   }
 
   @DeleteMapping

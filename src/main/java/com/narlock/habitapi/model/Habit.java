@@ -1,6 +1,7 @@
 package com.narlock.habitapi.model;
 
 import jakarta.persistence.*;
+import java.time.LocalTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,4 +20,7 @@ public class Habit {
   @Id
   @Column(name = "user_id")
   private String userId;
+
+  @Column(name = "remind_time")
+  private LocalTime remindTime;
 }
