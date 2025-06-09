@@ -13,4 +13,5 @@ import lombok.RequiredArgsConstructor;
 public class HabitRemindResponse {
   private String name;
   private LocalTime remindTime;
+  private Integer remindRepeatMinutes;
 }

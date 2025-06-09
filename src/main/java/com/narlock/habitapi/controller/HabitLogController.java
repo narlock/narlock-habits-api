@@ -1,6 +1,7 @@
 package com.narlock.habitapi.controller;
 
 import com.narlock.habitapi.model.HabitLog;
+import com.narlock.habitapi.model.response.HabitLogResponse;
 import com.narlock.habitapi.service.HabitService;
 import java.time.LocalDate;
 import java.util.List;
@@ -18,7 +19,7 @@ public class HabitLogController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public HabitLog createHabitLog(@RequestBody HabitLog habitLog) {
+  public HabitLogResponse createHabitLog(@RequestBody HabitLog habitLog) {
     return habitService.createHabitEntry(habitLog);
   }
 
@@ -33,5 +34,15 @@ public class HabitLogController {
       return habitService.getHabitEntryByDate(name, userId, date);
     }
     return habitService.getHabitCompletedDate(name, userId);
+  }
+
+  @DeleteMapping
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteLogForHabit(
+          @RequestParam String name,
+          @RequestParam String userId,
+          @RequestParam LocalDate date
+  ) {
+    habitService.deleteHabitEntry(name, userId, date);
   }
 }

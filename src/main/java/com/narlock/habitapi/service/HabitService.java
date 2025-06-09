@@ -5,6 +5,7 @@ import com.narlock.habitapi.model.HabitId;
 import com.narlock.habitapi.model.HabitLog;
 import com.narlock.habitapi.model.HabitLogId;
 import com.narlock.habitapi.model.error.NotFoundException;
+import com.narlock.habitapi.model.response.HabitLogResponse;
 import com.narlock.habitapi.model.response.HabitRemindResponse;
 import com.narlock.habitapi.repository.HabitLogRepository;
 import com.narlock.habitapi.repository.HabitRepository;
@@ -51,9 +52,16 @@ public class HabitService {
     }
   }
 
-  public HabitLog createHabitEntry(HabitLog habitLog) {
+  public HabitLogResponse createHabitEntry(HabitLog habitLog) {
     getHabit(habitLog.getName(), habitLog.getUserId());
-    return habitLogRepository.save(habitLog);
+    HabitLog savedHabitLog = habitLogRepository.save(habitLog);
+    Habit habit = getHabit(habitLog.getName(), habitLog.getUserId());
+    Integer streak = getStreakForHabit(habit);
+    return HabitLogResponse.builder()
+            .habit(habit)
+            .date(savedHabitLog.getDate())
+            .streak(streak)
+            .build();
   }
 
   public List<String> getHabitCompletedDate(String name, String userId) {
@@ -97,7 +105,20 @@ public class HabitService {
             remindHabit ->
                 !(getHabitCompletedDate(remindHabit.getName(), remindHabit.getUserId())
                     .contains(LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE))))
-            .map(filteredHabit -> HabitRemindResponse.builder().remindTime(filteredHabit.getRemindTime()).name(filteredHabit.getName()).build())
+            .map(filteredHabit -> HabitRemindResponse.builder()
+                    .remindTime(filteredHabit.getRemindTime())
+                    .name(filteredHabit.getName())
+                    .remindRepeatMinutes(filteredHabit.getRemindRepeatMinutes()).
+                    build())
       .toList();
+  }
+
+  public void deleteHabitEntry(String name, String userId, LocalDate date) {
+      HabitLog habitLog = HabitLog.builder()
+              .name(name)
+              .userId(userId)
+              .date(date)
+              .build();
+      habitLogRepository.delete(habitLog);
   }
 }
