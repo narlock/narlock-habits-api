@@ -23,4 +23,7 @@ public class Habit {
 
   @Column(name = "remind_time")
   private LocalTime remindTime;
+
+  @Column(name = "remind_repeat_minutes")
+  private Integer remindRepeatMinutes;
 }

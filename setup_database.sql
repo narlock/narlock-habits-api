@@ -5,6 +5,7 @@ CREATE TABLE habit (
     name VARCHAR(250),
     user_id CHAR(36),
     remind_time TIME,
+    remind_repeat_minutes INT,
     PRIMARY KEY (name, user_id)
 );
 
